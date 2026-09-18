@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import { stories } from '../data/stories';
+
+const title = 'Case Ledger';
+---
+
+<Layout title={title} hideChrome={true}>
+  <div class="wrapper min-h-screen flex flex-col font-serif">
+    <header class="chrome-panel-bg w-full px-4 sm:px-6 lg:px-8 py-4 border-b border-border">
+      <div class="flex flex-wrap items-center justify-between gap-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-type text-sm">
+            CD
+          </div>
+          <div>
+            <div class="text-foreground font-semibold text-responsive-lg leading-tight">Clara Denari</div>
+            <div class="text-muted-foreground text-xs font-type uppercase tracking-wide">Case Files &middot; Boston Bureau</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 font-type text-xs uppercase tracking-wide">
+          <span class="text-muted-foreground">Case Dossier</span>
+          <span id="stat-solved" class="px-3 py-1 rounded-full bg-secondary text-secondary-foreground">0 solved</span>
+          <span id="stat-open" class="px-3 py-1 rounded-full bg-muted text-muted-foreground">2 open</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="h-px flex-1 bg-border"></span>
+        <span class="font-type text-xs uppercase tracking-widest text-muted-foreground">Current Investigation</span>
+        <span class="h-px flex-1 bg-border"></span>
+      </div>
+
+      <!-- Hero: featured case -->
+      <div id="hero-panel" class="clay-deep rounded-2xl overflow-hidden border border-border grid md:grid-cols-2" style="background: var(--card);">
+        <div class="aspect-square md:aspect-auto">
+          <img id="hero-image" src={stories[0].thumbnail} alt="" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6 sm:p-8 flex flex-col justify-center">
+          <div class="text-muted-foreground font-type text-xs uppercase tracking-wide mb-2" id="hero-file-label">Case No. 01</div>
+          <h1 id="hero-title" class="text-responsive-2xl md:text-responsive-3xl font-bold text-foreground mb-3">
+            {stories[0].caseTitle}
+          </h1>
+          <p id="hero-synopsis" class="text-muted-foreground leading-relaxed mb-4">
+            {stories[0].tagline}
+          </p>
+          <div id="hero-progress" class="flex items-center gap-2 mb-6 font-type text-xs uppercase tracking-wide text-muted-foreground">
+            <span id="hero-progress-text">0 of {stories[0].totalClues} clues</span>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a id="hero-cta" href={stories[0].entryUrl} class="clay px-5 py-3 rounded-lg bg-primary text-primary-foreground font-sans font-semibold hover:opacity-90 transition-opacity">
+              Begin investigation &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 my-10">
+        <span class="h-px flex-1 bg-border"></span>
+        <span class="font-type text-xs uppercase tracking-widest text-muted-foreground">Case Ledger</span>
+        <span class="h-px flex-1 bg-border"></span>
+      </div>
+
+      <!-- Case grid -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        {stories.map((story) => (
+          <a
+            href={story.entryUrl}
+            class="case-card clay rounded-2xl border border-border overflow-hidden block hover:-translate-y-1 transition-transform"
+            style="background: var(--card);"
+            data-story-id={story.id}
+            data-storage-key={story.storageKey}
+            data-total-clues={story.totalClues}
+            data-entry-url={story.entryUrl}
+          >
+            <div class="aspect-[16/9]">
+              <img src={story.thumbnail} alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-5">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-type text-xs uppercase tracking-wide text-muted-foreground">File {story.fileNumber}</span>
+                <span class="case-status font-type text-xs uppercase tracking-wide px-2 py-1 rounded-full bg-muted text-muted-foreground">Not started</span>
+              </div>
+              <h3 class="text-foreground font-bold text-responsive-lg mb-1">{story.caseTitle}</h3>
+              <p class="text-muted-foreground text-sm mb-3">{story.tagline}</p>
+              <div class="flex items-center gap-1">
+                {Array.from({ length: story.totalClues }).map((_, i) => (
+                  <span class="clue-dot w-2 h-2 rounded-full bg-muted" data-dot-index={i}></span>
+                ))}
+                <span class="case-progress-text ml-2 font-type text-xs text-muted-foreground">0/{story.totalClues}</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<script define:vars={{ stories }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    function getClueCount(storageKey) {
+      try {
+        const map = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        return Object.values(map).filter((v) => v === true).length;
+      } catch (e) {
+        return 0;
+      }
+    }
+
+    function getStatus(count, total) {
+      if (count >= total) return 'solved';
+      if (count > 0) return 'in-progress';
+      return 'not-started';
+    }
+
+    const statusLabels = {
+      solved: 'Solved',
+      'in-progress': 'In progress',
+      'not-started': 'Not started',
+    };
+
+    const progress = stories.map((story) => {
+      const count = getClueCount(story.storageKey);
+      return { story, count, status: getStatus(count, story.totalClues) };
+    });
+
+    // Update each case card
+    document.querySelectorAll('.case-card').forEach((card) => {
+      const storyId = card.getAttribute('data-story-id');
+      const entry = progress.find((p) => p.story.id === storyId);
+      if (!entry) return;
+
+      const statusEl = card.querySelector('.case-status');
+      if (statusEl) {
+        statusEl.textContent = statusLabels[entry.status];
+        statusEl.classList.remove('bg-muted', 'text-muted-foreground', 'bg-sage', 'bg-primary');
+        if (entry.status === 'solved') {
+          statusEl.classList.add('bg-sage', 'text-primary-foreground');
+        } else if (entry.status === 'in-progress') {
+          statusEl.classList.add('bg-primary', 'text-primary-foreground');
+        } else {
+          statusEl.classList.add('bg-muted', 'text-muted-foreground');
+        }
+      }
+
+      const dots = card.querySelectorAll('.clue-dot');
+      dots.forEach((dot, i) => {
+        if (i < entry.count) {
+          dot.classList.remove('bg-muted');
+          dot.classList.add('bg-primary');
+        }
+      });
+
+      const progressText = card.querySelector('.case-progress-text');
+      if (progressText) {
+        progressText.textContent = `${entry.count}/${entry.story.totalClues}`;
+      }
+    });
+
+    // Update header stat badges
+    const solvedCount = progress.filter((p) => p.status === 'solved').length;
+    const openCount = progress.length - solvedCount;
+    const statSolved = document.getElementById('stat-solved');
+    const statOpen = document.getElementById('stat-open');
+    if (statSolved) statSolved.textContent = `${solvedCount} solved`;
+    if (statOpen) statOpen.textContent = `${openCount} open`;
+
+    // Pick the featured case for the hero: prefer in-progress, then not-started, then solved
+    const priority = { 'in-progress': 0, 'not-started': 1, solved: 2 };
+    const featured = [...progress].sort((a, b) => priority[a.status] - priority[b.status])[0];
+
+    if (featured) {
+      const { story, count, status } = featured;
+      const fileLabel = document.getElementById('hero-file-label');
+      const heroTitle = document.getElementById('hero-title');
+      const heroSynopsis = document.getElementById('hero-synopsis');
+      const heroImage = document.getElementById('hero-image');
+      const heroProgressText = document.getElementById('hero-progress-text');
+      const heroCta = document.getElementById('hero-cta');
+
+      if (fileLabel) fileLabel.textContent = `Case No. ${story.fileNumber}`;
+      if (heroTitle) heroTitle.textContent = story.caseTitle;
+      if (heroSynopsis) heroSynopsis.textContent = story.tagline;
+      if (heroImage) heroImage.src = story.thumbnail;
+      if (heroProgressText) heroProgressText.textContent = `${count} of ${story.totalClues} clues`;
+      if (heroCta) {
+        heroCta.href = story.entryUrl;
+        heroCta.textContent = status === 'not-started'
+          ? 'Begin investigation →'
+          : status === 'solved'
+            ? 'Review case →'
+            : 'Continue investigation →';
+      }
+    }
+  });
+</script>

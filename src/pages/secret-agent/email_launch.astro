@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Page from '../../components/Page.astro';
+import SecretAgentLayout from '../../components/SecretAgentLayout.astro';
+import Typewriter from '../../components/Typewriter.astro';
+import NotificationPanel from '../../components/NotificationPanel.astro';
+import EvidenceAction from '../../components/EvidenceAction.vue';
+
+const title = 'One Last Temptation';
+const backdrop = "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto/samples/landscapes/nature-mountains";
+---
+
+<Layout title={title} backdrop={backdrop} fullScreenLayout={true}>
+  <div class="prose max-w-none">
+    <SecretAgentLayout title={title} backdrop={backdrop} />
+
+    <div class="w-full mb-6">
+      <h2 class="text-responsive-xl md:text-responsive-2xl font-bold text-blue-400 mb-4 shadow-lg">
+        One Last Temptation
+      </h2>
+
+      <div class="bg-black bg-opacity-50 border-2 border-blue-500 rounded-lg p-6 mb-6">
+        <Typewriter
+          text="With ninety minutes on the clock, a file lands in the shared drive disguised as an approved asset — same filename pattern, same folder, wrong everything else. The Secret Agent surfaces it as a candidate for the email header because it looks like it belongs there.<br/><br/>'It's not being sneaky,' Clara says. 'It's being literal. It matched a pattern. It didn't check the source.' She rejects the file herself, out loud, so there's a record of the decision — then has the Agent build the real email header and Open Graph image from the verified source instead."
+          speed={18}
+          delay={500}
+          class="block mb-4 text-gray-100 text-responsive-base md:text-responsive-lg leading-relaxed"
+        />
+      </div>
+    </div>
+
+    <NotificationPanel />
+
+    <div class="w-full flex flex-col sm:flex-row gap-4 justify-center mb-6">
+      <EvidenceAction
+        actionType="text"
+        label="Reject the planted file"
+        resultText="Logged and rejected. The Agent updates its record: this asset ID is never to be treated as approved, no matter how convincing the filename."
+        client:load
+      />
+      <EvidenceAction id="4" client:load />
+    </div>
+
+    <div class="w-full flex justify-center">
+      <Page
+        url="secret-agent/lab_og"
+        action="Finalize the Open Graph Image"
+        condition="evidence_4"
+        resultText="Email and social assets logged. Last step before midnight."
+      />
+    </div>
+  </div>
+</Layout>

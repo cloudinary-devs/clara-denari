@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Page from '../../components/Page.astro';
+import SecretAgentLayout from '../../components/SecretAgentLayout.astro';
+import Typewriter from '../../components/Typewriter.astro';
+
+const title = 'Countdown to Midnight';
+const backdrop = "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto/sample";
+---
+
+<Layout title={title} backdrop={backdrop} fullScreenLayout={true}>
+  <div class="prose max-w-none">
+    <SecretAgentLayout title={title} backdrop={backdrop} />
+
+    <div class="w-full mb-6">
+      <h2 class="text-responsive-xl md:text-responsive-2xl font-bold text-blue-400 mb-4 shadow-lg">
+        Countdown to Midnight
+      </h2>
+
+      <div class="bg-black bg-opacity-50 border-2 border-blue-500 rounded-lg p-6 mb-6">
+        <Typewriter
+          text="Upstairs in Maison Vesper's media lab, the boutique's biggest launch in a decade is six hours from going live: the Vesper No. 1, the house's first precision timepiece. The approved campaign is locked and ready — until it isn't.<br/><br/>Someone has flooded the launch workflow with counterfeit watch photography, doctored campaign shots, false prices, and 'leaked' materials built to look real. At midnight, every scheduled channel fires automatically. If the wrong image goes out, Maison Vesper's credibility is gone before the watch ever reaches a customer.<br/><br/>Clara Denari has one job tonight: make sure only the real launch reaches the world. She isn't chasing anyone through the streets this time. She's staying right here, at the desk, with a new kind of partner — the Secret Agent, an AI operative that can search the vault, run tools, and assemble a launch faster than any human team ever could. It is also completely literal. It cannot tell an approved photo from a convincing fake. That judgment call belongs to Clara. Tonight, it also belongs to you."
+          speed={18}
+          delay={800}
+          class="block mb-4 text-gray-100 text-responsive-base md:text-responsive-lg leading-relaxed"
+        />
+      </div>
+    </div>
+
+    <div class="w-full flex justify-center">
+      <Page url="secret-agent/brief" action="Open the Launch Brief" condition="none" />
+    </div>
+  </div>
+</Layout>
