@@ -20,7 +20,7 @@ An interactive story/game engine for a choose-your-own adventure experience intr
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/jlooper/clara-denari.git
+git clone https://github.com/cloudinary-devs/clara-denari.git
 cd clara-denari
 ```
 

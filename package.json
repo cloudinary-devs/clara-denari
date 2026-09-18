@@ -14,12 +14,11 @@
 	"author": "jlooper",
 	"license": "MIT",
 	"dependencies": {
-		"@astrojs/tailwind": "^5.0.0",
-		"@astrojs/vue": "^4.5.3",
-		"astro": "^4.0.0",
+		"@astrojs/vue": "^7.0.3",
+		"astro": "^7.3.3",
 		"c2pa": "^0.30.15",
 		"c2pa-wc": "^0.14.5",
-		"vue": "^3.5.18"
+		"vue": "^3.5.43"
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.0.0",
@@ -27,10 +26,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/jlooper/clara-denari"
+		"url": "git+https://github.com/cloudinary-devs/clara-denari"
 	},
 	"bugs": {
-		"url": "https://github.com/jlooper/clara-denari"
+		"url": "https://github.com/cloudinary-devs/clara-denari/issues"
 	},
-	"homepage": "https://github.com/jlooper/clara-denari"
+	"homepage": "https://github.com/cloudinary-devs/clara-denari"
 }

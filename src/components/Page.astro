@@ -79,36 +79,57 @@ const localizedAction = getLocalizedAction();
           const results = JSON.parse(localStorage.getItem('labResults') || '[]');
           shouldShow = results.some((result) => result.lab === labName && result.correct === true);
         }
+        // Check evidence collection condition (Secret Agent story)
+        else if (condition.startsWith('evidence_')) {
+          const itemId = condition.replace('evidence_', '');
+          const evidenceItems = JSON.parse(localStorage.getItem('secret_agent_evidence') || '{}');
+          shouldShow = evidenceItems[itemId] === true;
+        }
         // Check item collection condition
         else if (!isNaN(Number(condition))) {
           const itemId = condition;
           const inventoryItems = JSON.parse(localStorage.getItem('inventory_item') || '{}');
           shouldShow = inventoryItems[itemId] === true;
         }
-        
+
         // Hide button if condition not met
         if (!shouldShow) {
           (button as HTMLElement).style.display = 'none';
         }
       }
     });
-    
+
     // Listen for inventory changes to update button visibility
     window.addEventListener('item_added', () => {
       pageButtons.forEach(button => {
         const condition = button.getAttribute('data-condition');
-        
+
         if (condition && condition !== 'none') {
           let shouldShow = true;
-          
+
           // Check item collection condition
           if (!isNaN(Number(condition))) {
             const itemId = condition;
             const inventoryItems = JSON.parse(localStorage.getItem('inventory_item') || '{}');
             shouldShow = inventoryItems[itemId] === true;
           }
-          
+
           // Show/hide button based on condition
+          (button as HTMLElement).style.display = shouldShow ? 'block' : 'none';
+        }
+      });
+    });
+
+    // Listen for evidence changes to update button visibility (Secret Agent story)
+    window.addEventListener('evidence_added', () => {
+      pageButtons.forEach(button => {
+        const condition = button.getAttribute('data-condition');
+
+        if (condition && condition.startsWith('evidence_')) {
+          const itemId = condition.replace('evidence_', '');
+          const evidenceItems = JSON.parse(localStorage.getItem('secret_agent_evidence') || '{}');
+          const shouldShow = evidenceItems[itemId] === true;
+
           (button as HTMLElement).style.display = shouldShow ? 'block' : 'none';
         }
       });

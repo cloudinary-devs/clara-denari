@@ -292,7 +292,8 @@
       // Check if we're on a lab page
       function isLabPage() {
         const path = window.location.pathname;
-        return path.includes('lab_1') || path.includes('lab_2') || path.includes('/1') || path.includes('/2') || path.includes('lab_3') || path.includes('/3') || path.includes('lab_4') || path.includes('/4');
+        return path.includes('lab_1') || path.includes('lab_2') || path.includes('/1') || path.includes('/2') || path.includes('lab_3') || path.includes('/3') || path.includes('lab_4') || path.includes('/4')
+          || path.includes('lab_vault') || path.includes('lab_social') || path.includes('lab_press') || path.includes('lab_og');
       }
       
       // Get current lab based on URL
@@ -364,6 +365,75 @@
             defaultCloudName: 'claradenari',
             defaultPublicId: 'clara-denari/MIT',
             defaultTransformation: 'c_crop,g_north,h_0.50,w_1.00'
+          };
+        }
+
+        if (path.includes('lab_vault')) {
+          return {
+            name: 'Lab S1',
+            correctAnswer: 'tag=vesper-launch-2025 AND verified=true',
+            question: 'The Secret Agent can search the entire vault instantly. What should Clara tell it to search for first?',
+            options: [
+              { value: 'Every file with "watch" in the name', text: 'Every file with "watch" in the name' },
+              { value: 'The most recently uploaded images', text: 'The most recently uploaded images' },
+              { value: 'tag=vesper-launch-2025 AND verified=true', text: 'Only assets tagged vesper-launch-2025 and marked verified' },
+              { value: 'Whatever looks the most polished', text: 'Whatever looks the most polished' }
+            ],
+            successMessage: 'Exactly. The Agent can move at incredible speed, but it will only surface trustworthy results if Clara tells it exactly what "trustworthy" means — a specific tag and a verified flag, not a vibe.',
+            defaultCloudName: 'demo',
+            defaultPublicId: 'samples/coffee',
+            defaultTransformation: 'f_auto,q_auto,w_400'
+          };
+        }
+        if (path.includes('lab_social')) {
+          return {
+            name: 'Lab S2',
+            correctAnswer: 'c_fill,g_auto,ar_1:1',
+            question: 'Which transformation correctly crops the verified hero image to a 1:1 square for social, without distorting or cutting off the watch face?',
+            options: [
+              { value: 'c_scale,w_100,h_100', text: 'c_scale,w_100,h_100 (stretches the image)' },
+              { value: 'c_fill,g_south,ar_1:1', text: 'c_fill,g_south,ar_1:1 (crops off the top)' },
+              { value: 'c_fill,g_auto,ar_1:1', text: 'c_fill,g_auto,ar_1:1 (smart-crops around the subject)' },
+              { value: 'e_grayscale', text: 'e_grayscale (no crop at all)' }
+            ],
+            successMessage: 'Correct! g_auto lets Cloudinary’s content-aware cropping keep the watch centered, no matter what aspect ratio the channel needs.',
+            defaultCloudName: 'demo',
+            defaultPublicId: 'samples/ecommerce/leather-bag-gray',
+            defaultTransformation: 'c_fill,g_auto,ar_1:1,w_400'
+          };
+        }
+        if (path.includes('lab_press')) {
+          return {
+            name: 'Lab S3',
+            correctAnswer: 'fl_c2pa',
+            question: 'Which flag proves a press image’s origin and edit history to a journalist, via Content Credentials?',
+            options: [
+              { value: 'e_sepia', text: 'e_sepia' },
+              { value: 'fl_attachment', text: 'fl_attachment' },
+              { value: 'fl_c2pa', text: 'fl_c2pa' },
+              { value: 'q_auto', text: 'q_auto' }
+            ],
+            successMessage: 'Right — fl_c2pa attaches the Content Credentials manifest, so anyone downstream can verify exactly which tools touched this image and when.',
+            defaultCloudName: 'demo',
+            defaultPublicId: 'samples/shoes',
+            defaultTransformation: 'fl_c2pa,f_auto,q_auto,w_400'
+          };
+        }
+        if (path.includes('lab_og')) {
+          return {
+            name: 'Lab S4',
+            correctAnswer: 'w_1200,h_630,c_fill',
+            question: 'Which transformation produces a correctly-sized Open Graph image so the launch link preview looks right everywhere it’s shared?',
+            options: [
+              { value: 'w_100,h_100,c_thumb', text: 'w_100,h_100,c_thumb' },
+              { value: 'w_1200,h_630,c_fill', text: 'w_1200,h_630,c_fill' },
+              { value: 'w_4000,h_3000,c_scale', text: 'w_4000,h_3000,c_scale' },
+              { value: 'ar_9:16,c_crop', text: 'ar_9:16,c_crop' }
+            ],
+            successMessage: '1200×630 is the standard Open Graph size — the launch announcement will render cleanly on every platform it’s shared to.',
+            defaultCloudName: 'demo',
+            defaultPublicId: 'samples/landscapes/nature-mountains',
+            defaultTransformation: 'w_1200,h_630,c_fill,f_auto,q_auto'
           };
         }
 
@@ -618,6 +688,18 @@
         }
         else if (currentLab.name === 'Lab 4') {
           return '/the_dome';
+        }
+        else if (currentLab.name === 'Lab S1') {
+          return '/secret-agent/vault_reveal';
+        }
+        else if (currentLab.name === 'Lab S2') {
+          return '/secret-agent/press_room';
+        }
+        else if (currentLab.name === 'Lab S3') {
+          return '/secret-agent/email_launch';
+        }
+        else if (currentLab.name === 'Lab S4') {
+          return '/secret-agent/dossier';
         }
         return '#';
       }

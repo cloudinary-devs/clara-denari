@@ -1,107 +1,143 @@
 ---
 import Inventory from './Inventory.vue';
+import EvidenceLedger from './EvidenceLedger.vue';
 import { translations } from '../i18n/translations';
-// Nav component for Astro
+import { stories, getStoryForPath } from '../data/stories';
+
+const currentStory = getStoryForPath(Astro.url.pathname);
 ---
 
-<nav class="nav rounded-t">
-  <!-- Top row with logo and language selector -->
-  <div class="flex items-center justify-between pr-0 lg:pr-8 md:pr-6 sm:pr-4">
+<header class="site-header chrome-panel-bg w-full px-4 sm:px-6 lg:px-8 py-4 border-b border-border">
+  <!-- Top row with logo, story picker, and language selector -->
+  <div class="flex flex-wrap items-center justify-between gap-y-2">
     <div class="flex items-center">
       <a href="/" class="flex items-center">
         <img src="/images/logo.png" alt="Cloudinary Logo" class="h-8 w-auto">
       </a>
     </div>
-    
-    <!-- Language Selector Dropdown -->
-    <div class="relative">
-      <button 
-        id="language-dropdown-btn"
-        class="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition-colors px-3 py-2 rounded-lg hover:bg-amber-900 hover:bg-opacity-20 text-responsive-sm"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <span id="current-lang">English</span>
-        <span id="current-flag">🇺🇸</span>
-        <svg class="w-4 h-4 float-right mt-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </button>
-      
-      <div 
-        id="language-dropdown"
-        class="absolute right-0 mt-2 w-56 bg-gray-800 border border-blue-600 rounded-lg shadow-xl hidden z-50"
-        style="background: linear-gradient(135deg, #2a1f1a 0%, #1a1410 25%, #0f0a08 50%, #0a0705 75%, #050302 100%);"
-      >
-        <div class="py-2 m-2">
-          <button 
-            class="w-full text-left px-4 py-2 text-gray-200 hover:bg-amber-700 hover:bg-opacity-30 transition-colors flex items-center space-x-3"
-            data-lang="en"
-            data-flag="🇺🇸"
-          >
-            <span>🇺🇸</span>
-            <span>English</span>
-          </button>
-          <button 
-            class="w-full text-left px-4 py-2 text-gray-200 hover:bg-amber-700 hover:bg-opacity-30 transition-colors flex items-center space-x-3"
-            data-lang="fr"
-            data-flag="🇫🇷"
-          >
-            <span>🇫🇷</span>
-            <span>Français</span>
-          </button>
-          <button 
-            class="w-full text-left px-4 py-2 text-gray-200 hover:bg-amber-700 hover:bg-opacity-30 transition-colors flex items-center space-x-3"
-            data-lang="es"
-            data-flag="🇪🇸"
-          >
-            <span>🇪🇸</span>
-            <span>Español</span>
-          </button>
-          <button 
-            class="w-full text-left px-4 py-2 text-gray-200 hover:bg-amber-700 hover:bg-opacity-30 transition-colors flex items-center space-x-3"
-            data-lang="pt-br"
-            data-flag="🇧🇷"
-          >
-            <span>🇧🇷</span>
-            <span>Português (Brasil)</span>
-          </button>
+
+    <nav aria-label="Site navigation" class="flex flex-wrap items-center justify-end gap-2">
+      <!-- Story Picker Dropdown -->
+      <div class="relative">
+        <button
+          id="stories-dropdown-btn"
+          class="flex items-center space-x-2 text-foreground hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-secondary text-responsive-sm"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span>📖 More Adventures</span>
+          <svg class="w-4 h-4 float-right mt-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+
+        <div
+          id="stories-dropdown"
+          class="chrome-panel-bg clay-deep absolute right-0 mt-2 w-72 max-w-[90vw] border border-border rounded-lg hidden z-50"
+        >
+          <div class="py-2 m-2">
+            {stories.map((story) => (
+              <a
+                href={story.entryUrl}
+                class={`block px-4 py-2 rounded transition-colors ${story.id === currentStory.id ? 'bg-secondary' : 'hover:bg-secondary'}`}
+              >
+                <div class="text-card-foreground font-semibold text-responsive-sm">{story.title}</div>
+                <div class="text-muted-foreground text-xs mt-1">{story.tagline}</div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+
+      <!-- Language Selector Dropdown -->
+      <div class="relative">
+        <button
+          id="language-dropdown-btn"
+          class="flex items-center space-x-2 text-foreground hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-secondary text-responsive-sm"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="current-lang">English</span>
+          <span id="current-flag">🇺🇸</span>
+          <svg class="w-4 h-4 float-right mt-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+
+        <div
+          id="language-dropdown"
+          class="chrome-panel-bg clay-deep absolute right-0 mt-2 w-56 max-w-[90vw] border border-border rounded-lg hidden z-50"
+        >
+          <div class="py-2 m-2">
+            <button
+              class="w-full text-left px-4 py-2 text-card-foreground hover:bg-secondary transition-colors flex items-center space-x-3"
+              data-lang="en"
+              data-flag="🇺🇸"
+            >
+              <span>🇺🇸</span>
+              <span>English</span>
+            </button>
+            <button
+              class="w-full text-left px-4 py-2 text-card-foreground hover:bg-secondary transition-colors flex items-center space-x-3"
+              data-lang="fr"
+              data-flag="🇫🇷"
+            >
+              <span>🇫🇷</span>
+              <span>Français</span>
+            </button>
+            <button
+              class="w-full text-left px-4 py-2 text-card-foreground hover:bg-secondary transition-colors flex items-center space-x-3"
+              data-lang="es"
+              data-flag="🇪🇸"
+            >
+              <span>🇪🇸</span>
+              <span>Español</span>
+            </button>
+            <button
+              class="w-full text-left px-4 py-2 text-card-foreground hover:bg-secondary transition-colors flex items-center space-x-3"
+              data-lang="pt-br"
+              data-flag="🇧🇷"
+            >
+              <span>🇧🇷</span>
+              <span>Português (Brasil)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
   </div>
 
   <!-- H1 on new line -->
   <div class="text-center pt-4">
-    <h1 id="game-title" class="text-responsive-2xl md:text-responsive-3xl lg:text-responsive-4xl">Clara Denari and the Mysterious Transformations</h1>
+    <h1 id="game-title" class="text-responsive-2xl md:text-responsive-3xl lg:text-responsive-4xl">{currentStory.title}</h1>
   </div>
 
-  <!-- Mobile inventory (hidden by default) -->
+  <!-- Mobile inventory / evidence ledger (hidden by default) -->
   <div class="w-full block justify-end lg:flex lg:w-auto">
     <div class="nav-text text-med lg:flex-grow">
       <span class="lg:hidden md:hidden sm:hidden hidden" id="mobile-inventory">
-        <Inventory />
+        {currentStory.id === 'counterfeit-countdown' ? <EvidenceLedger /> : <Inventory />}
       </span>
     </div>
   </div>
-</nav>
+</header>
 
-<script define:vars={{ translations }}>
+<script define:vars={{ translations, currentStoryId: currentStory.id, currentStoryTitle: currentStory.title }}>
 
   // Language dropdown functionality
   document.addEventListener('DOMContentLoaded', () => {
     const languageBtn = document.getElementById('language-dropdown-btn');
     const languageDropdown = document.getElementById('language-dropdown');
     const currentLang = document.getElementById('current-lang');
-    
+
     const currentFlag = document.getElementById('current-flag');
-    
+
     if (languageBtn && languageDropdown && currentLang && currentFlag) {
       // Toggle dropdown
       languageBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         const isExpanded = languageBtn.getAttribute('aria-expanded') === 'true';
-        
+
         if (isExpanded) {
           languageDropdown.classList.add('hidden');
           languageBtn.setAttribute('aria-expanded', 'false');
@@ -110,16 +146,16 @@ import { translations } from '../i18n/translations';
           languageBtn.setAttribute('aria-expanded', 'true');
         }
       });
-      
+
       // Handle language selection
       languageDropdown.addEventListener('click', (e) => {
         const target = e.target;
         const langButton = target.closest('button[data-lang]');
-        
+
         if (langButton) {
           const lang = langButton.getAttribute('data-lang');
           const flag = langButton.getAttribute('data-flag');
-          
+
           if (lang && flag) {
             // Update current language display
             const languageNames = {
@@ -130,29 +166,31 @@ import { translations } from '../i18n/translations';
             };
             currentLang.textContent = languageNames[lang] || lang;
             currentFlag.textContent = flag;
-            
+
             // Store language preference
             localStorage.setItem('preferred-language', lang);
-            
+
             // Close dropdown
             languageDropdown.classList.add('hidden');
             languageBtn.setAttribute('aria-expanded', 'false');
-            
-            // Update game title
+
+            // Update game title (only the original story has translated titles so far)
             const gameTitle = document.getElementById('game-title');
             if (gameTitle) {
-              gameTitle.textContent = translations['game.title'][lang] || translations['game.title']['en'];
+              gameTitle.textContent = currentStoryId === 'mysterious-transformations'
+                ? (translations['game.title'][lang] || translations['game.title']['en'])
+                : currentStoryTitle;
             }
 
             // Trigger language change event
-            window.dispatchEvent(new CustomEvent('language-changed', { 
-              detail: { language: lang } 
+            window.dispatchEvent(new CustomEvent('language-changed', {
+              detail: { language: lang }
             }));
-            
+
           }
         }
       });
-      
+
       // Close dropdown when clicking outside
       document.addEventListener('click', (e) => {
         if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
@@ -160,7 +198,7 @@ import { translations } from '../i18n/translations';
           languageBtn.setAttribute('aria-expanded', 'false');
         }
       });
-      
+
               // Load saved language preference after a short delay to avoid hydration issues
         setTimeout(() => {
           const savedLang = localStorage.getItem('preferred-language');
@@ -176,15 +214,45 @@ import { translations } from '../i18n/translations';
               };
               currentLang.textContent = languageNames[savedLang] || savedLang;
               currentFlag.textContent = flag;
-              
-              // Update game title
+
+              // Update game title (only the original story has translated titles so far)
               const gameTitle = document.getElementById('game-title');
               if (gameTitle) {
-                gameTitle.textContent = translations['game.title'][savedLang] || translations['game.title']['en'];
+                gameTitle.textContent = currentStoryId === 'mysterious-transformations'
+                  ? (translations['game.title'][savedLang] || translations['game.title']['en'])
+                  : currentStoryTitle;
               }
             }
           }
         }, 150);
+    }
+  });
+
+  // Story picker dropdown functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const storiesBtn = document.getElementById('stories-dropdown-btn');
+    const storiesDropdown = document.getElementById('stories-dropdown');
+
+    if (storiesBtn && storiesDropdown) {
+      storiesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = storiesBtn.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+          storiesDropdown.classList.add('hidden');
+          storiesBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          storiesDropdown.classList.remove('hidden');
+          storiesBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!storiesBtn.contains(e.target) && !storiesDropdown.contains(e.target)) {
+          storiesDropdown.classList.add('hidden');
+          storiesBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
     }
   });
 </script>
@@ -193,9 +261,19 @@ import { translations } from '../i18n/translations';
   .markdown-body a {
     text-decoration: none;
   }
-  
+
+  /* Previously inherited from the `.markdown-body h1` rule in global.css;
+     restated here now that the header lives outside that box. */
+  #game-title {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+
   /* Dropdown arrow rotation */
   #language-dropdown-btn[aria-expanded="true"] svg {
     transform: rotate(90deg);
   }
-</style> 
+</style>
