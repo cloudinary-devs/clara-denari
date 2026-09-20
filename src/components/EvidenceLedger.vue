@@ -1,16 +1,16 @@
 <template>
   <div class="markdown-body">
     <div class="flex justify-between items-center">
-      <h2 class="text-responsive-l md:text-responsive-xl font-bold text-blue-400 shadow-lg">
+      <h2 class="text-responsive-l md:text-responsive-xl font-bold text-primary shadow-lg">
         Evidence Dossier
-        <span class="text-gray-400 font-normal text-responsive-sm">
+        <span class="text-muted-foreground font-normal text-responsive-sm">
           ({{ evidence.length }} / {{ totalEvidence }})
         </span>
       </h2>
     </div>
 
     <div id="evidence-container">
-      <div v-if="evidence.length === 0" class="text-gray-200 text-start p-3 text-responsive-sm" style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);">
+      <div v-if="evidence.length === 0" class="text-foreground text-start p-3 text-responsive-sm" style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);">
         No verified evidence logged yet.
       </div>
       <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-1">
@@ -28,8 +28,8 @@
               />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-gray-200 text-xs font-normal leading-tight" style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);">
-                <a :href="`/${item.location}`" class="hover:text-blue-400 transition-colors duration-200">
+              <p class="text-foreground text-xs font-normal leading-tight" style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);">
+                <a :href="`/${item.location}`" class="hover:text-primary transition-colors duration-200">
                   <span class="truncate">{{ item.name }}</span>
                 </a>
               </p>

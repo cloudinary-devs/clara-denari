@@ -1,16 +1,16 @@
 <template>
   <div class="markdown-body">
     <div class="flex justify-between items-center">
-      <h2 class="text-responsive-l md:text-responsive-xl font-bold text-blue-400 shadow-lg">
+      <h2 class="text-responsive-l md:text-responsive-xl font-bold text-primary shadow-lg">
         {{ isHydrated ? titleText : 'Inventory' }}
-        <span class="text-gray-400 font-normal text-responsive-sm">
+        <span class="text-muted-foreground font-normal text-responsive-sm">
           ({{ inventory.length }} / 5)
         </span>
       </h2>
     </div>
     
       <div id="inventory-container">
-        <div v-if="inventory.length === 0" class="text-gray-200 text-start p-3 text-responsive-sm" style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);">
+        <div v-if="inventory.length === 0" class="text-foreground text-start p-3 text-responsive-sm" style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);">
           {{ isHydrated ? emptyText : 'Sorry, there are no items here yet' }}
         </div>
         <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-1">
@@ -49,8 +49,8 @@
               
               <!-- Item name and details -->
               <div class="flex-1 min-w-0">
-                <p class="text-gray-200 text-xs font-normal leading-tight" style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);">
-                  <a :href="`/${item.location}`" class="hover:text-blue-400 transition-colors duration-200">
+                <p class="text-foreground text-xs font-normal leading-tight" style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);">
+                  <a :href="`/${item.location}`" class="hover:text-primary transition-colors duration-200">
                     <span class="truncate">{{ item.name }}</span>
                   </a>
                 </p>

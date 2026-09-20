@@ -13,35 +13,35 @@ const backdrop = "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto/sam
     <SecretAgentLayout title={title} backdrop={backdrop} />
 
     <div class="w-full mb-6">
-      <h2 class="text-2xl font-bold text-blue-400 mb-4 shadow-lg">
+      <h2 class="text-2xl font-bold text-primary mb-4 shadow-lg">
         Midnight Dossier
       </h2>
 
-      <div class="bg-black bg-opacity-50 border-2 border-blue-500 rounded-lg p-6 mb-6">
-        <div class="text-gray-100 text-lg leading-relaxed">
+      <div class="bg-black bg-opacity-50 border-2 border-border rounded-lg p-6 mb-6">
+        <div class="text-foreground text-lg leading-relaxed">
           <p class="mb-4">
             The clock is almost at midnight. Clara opens the dossier one last time to confirm every piece of evidence traces back to the approved launch brief before the channels fire automatically.
           </p>
 
           <!-- Success message - only shown when all evidence is logged -->
-          <div id="success-message" class="bg-green-900 bg-opacity-30 border border-green-500 rounded p-4 mt-6 hidden">
-            <h3 class="text-green-400 font-bold text-xl mb-2">🎉 Launch Approved!</h3>
-            <p class="text-green-200">
-              At 11:59, Clara closes the dossier: the launch brief, the verified hero image, the press kit with its Content Credentials intact, and the email and social assets — every one of them traced back to a single approved source. The counterfeit material sits quarantined, flagged, and out of reach of every channel about to go live.
+          <div id="success-message" class="bg-secondary bg-opacity-30 border border-sage rounded p-4 mt-6 hidden">
+            <h3 class="text-sage font-bold text-xl mb-2">🎉 Launch Approved!</h3>
+            <p class="text-foreground">
+              At 11:59, Clara closes the dossier: the launch brief, the verified hero image, the press kit with its Content Credentials intact, and the email and social assets, every one of them traced back to a single approved source. The counterfeit material sits quarantined, flagged, and out of reach of every channel about to go live.
               At midnight, Maison Vesper's true campaign, and nothing else, reaches the world.
             </p>
-            <p class="text-green-200 mt-4 font-semibold">
+            <p class="text-foreground mt-4 font-semibold">
               The Secret Agent decided how to execute the work. Clara decided what was true, permitted, and worth putting into the world.
             </p>
           </div>
 
           <!-- Message shown when evidence is missing -->
-          <div id="incomplete-message" class="bg-red-900 bg-opacity-30 border border-red-500 rounded p-4 mt-6">
-            <h3 class="text-red-400 font-bold text-xl mb-2">🔍 Dossier Incomplete</h3>
-            <p class="text-red-200 mb-3">
+          <div id="incomplete-message" class="bg-secondary bg-opacity-30 border border-destructive rounded p-4 mt-6">
+            <h3 class="text-destructive font-bold text-xl mb-2">🔍 Dossier Incomplete</h3>
+            <p class="text-foreground mb-3">
               It's almost midnight, and the dossier isn't complete. Go back through the investigation and make sure every piece of verified evidence has been logged before the launch goes out.
             </p>
-            <div class="text-red-300 text-sm">
+            <div class="text-destructive text-sm">
               <p class="font-semibold mb-2">Evidence still needed:</p>
               <ul id="missing-items" class="list-disc list-inside space-y-1">
                 <!-- Will be populated by JavaScript -->
@@ -59,7 +59,7 @@ const backdrop = "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto/sam
         <button
           id="return-button"
           onclick="window.location.href='/'"
-          class="px-8 py-4 bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-200 font-bold text-lg shadow-lg"
+          class="px-8 py-4 bg-gradient-to-br from-primary to-brick-deep text-primary-foreground rounded-lg hover:from-brick-deep hover:to-primary transition-all duration-200 font-bold text-lg shadow-lg"
         >
           🏠 Return to Start
         </button>

@@ -25,12 +25,12 @@ const checkAllItemsCollected = () => {
     
     <!-- Full width storyline -->
     <div class="w-full mb-6">
-      <h2 id="page-title" class="text-2xl font-bold text-blue-400 mb-4 shadow-lg" data-page-key="the_well">
+      <h2 id="page-title" class="text-2xl font-bold text-primary mb-4 shadow-lg" data-page-key="the_well">
         Ronan Park Well
       </h2>
       
-          <div class="bg-black bg-opacity-50 border-2 border-blue-500 rounded-lg p-6 mb-6">
-        <div class="text-gray-100 text-lg leading-relaxed">
+          <div class="bg-black bg-opacity-50 border-2 border-border rounded-lg p-6 mb-6">
+        <div class="text-foreground text-lg leading-relaxed">
           <p class="mb-4" data-translation-key="the_well.story.decoded_message">
             You've successfully decoded the hidden message and found your way to Ronan Park Well.
           </p>
@@ -40,9 +40,9 @@ const checkAllItemsCollected = () => {
           </p>
           
           <!-- Success message - only shown when all items are collected -->
-          <div id="success-message" class="bg-green-900 bg-opacity-30 border border-green-500 rounded p-4 mt-6 hidden">
-            <h3 class="text-green-400 font-bold text-xl mb-2" data-translation-key="the_well.success.title">🎉 Case Solved! Holopin Earned!</h3>
-            <p class="text-green-200" data-translation-key="the_well.success.message">
+          <div id="success-message" class="bg-secondary bg-opacity-30 border border-sage rounded p-4 mt-6 hidden">
+            <h3 class="text-sage font-bold text-xl mb-2" data-translation-key="the_well.success.title">🎉 Case Solved! Holopin Earned!</h3>
+            <p class="text-foreground" data-translation-key="the_well.success.message">
               Eureka! The stolen necklace is safe and sound and can be returned to its rightful owner. Congratulations on completing your first Clara Denari Adventure.
             </p>
             
@@ -50,7 +50,7 @@ const checkAllItemsCollected = () => {
             <div class="bg-opacity-30 rounded">
               
               
-              <p class="text-blue-200 mb-4" data-translation-key="badge.download.message">
+              <p class="text-primary mb-4" data-translation-key="badge.download.message">
                 You've successfully solved this Clara Denari mystery! Download your completion badge below by scanning the QR code. Don't forget to share on social media!
               </p>
               
@@ -91,13 +91,13 @@ const checkAllItemsCollected = () => {
           </div>
           
           <!-- Message shown when items are missing -->
-          <div id="incomplete-message" class="bg-red-900 bg-opacity-30 border border-red-500 rounded p-4 mt-6">
-            <h3 class="text-red-400 font-bold text-xl mb-2" data-translation-key="the_well.incomplete.title">🔍 Investigation Incomplete</h3>
-            <p class="text-red-200 mb-3" data-translation-key="the_well.incomplete.message">
+          <div id="incomplete-message" class="bg-secondary bg-opacity-30 border border-destructive rounded p-4 mt-6">
+            <h3 class="text-destructive font-bold text-xl mb-2" data-translation-key="the_well.incomplete.title">🔍 Investigation Incomplete</h3>
+            <p class="text-foreground mb-3" data-translation-key="the_well.incomplete.message">
               You've found the well, but you haven't collected all the necessary evidence yet. 
               Clara needs all items from her investigation to solve this case properly.
             </p>
-            <div class="text-red-300 text-sm">
+            <div class="text-destructive text-sm">
               <p class="font-semibold mb-2" data-translation-key="the_well.incomplete.items_needed">Items still needed:</p>
               <ul id="missing-items" class="list-disc list-inside space-y-1">
                 <!-- Will be populated by JavaScript -->
@@ -117,7 +117,7 @@ const checkAllItemsCollected = () => {
         <button 
           id="return-button"
           onclick="window.location.href='/'"
-          class="px-8 py-4 bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-200 font-bold text-lg shadow-lg"
+          class="px-8 py-4 bg-gradient-to-br from-primary to-brick-deep text-primary-foreground rounded-lg hover:from-brick-deep hover:to-primary transition-all duration-200 font-bold text-lg shadow-lg"
           data-translation-key="the_well.return_button"
         >
           Return to Start

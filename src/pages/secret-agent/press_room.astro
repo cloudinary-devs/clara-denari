@@ -15,16 +15,16 @@ const backdrop = "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto/sam
     <SecretAgentLayout title={title} backdrop={backdrop} />
 
     <div class="w-full mb-6">
-      <h2 class="text-responsive-xl md:text-responsive-2xl font-bold text-blue-400 mb-4 shadow-lg">
+      <h2 class="text-responsive-xl md:text-responsive-2xl font-bold text-primary mb-4 shadow-lg">
         The Press Kit
       </h2>
 
-      <div class="bg-black bg-opacity-50 border-2 border-blue-500 rounded-lg p-6 mb-6">
+      <div class="bg-black bg-opacity-50 border-2 border-border rounded-lg p-6 mb-6">
         <Typewriter
-          text="With the verified image locked, the Secret Agent assembles the press kit: a high-resolution image bound to its Content Credentials — the digital paper trail proving which tools touched it, when, and by whom. Clara checks that trail line by line before a single reporter sees it.<br/><br/>'Every tool call is logged,' she says. 'The asset ID, the transformation, the timestamp. If a journalist ever asks how we know this photo is real, we can show our work.'"
+          text="With the verified image locked, the Secret Agent assembles the press kit: a high-resolution image bound to its Content Credentials, the digital paper trail proving which tools touched it, when, and by whom. Clara checks that trail line by line before a single reporter sees it.<br/><br/>'Every tool call is logged,' she says. 'The asset ID, the transformation, the timestamp. If a journalist ever asks how we know this photo is real, we can show our work.'"
           speed={18}
           delay={500}
-          class="block mb-4 text-gray-100 text-responsive-base md:text-responsive-lg leading-relaxed"
+          class="block mb-4 max-w-prose text-foreground text-responsive-base md:text-responsive-lg leading-relaxed"
         />
       </div>
     </div>

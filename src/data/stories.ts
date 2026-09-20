@@ -22,7 +22,7 @@ export const stories: Story[] = [
     tagline: 'A stolen necklace, a city full of clues, and a crash course in Cloudinary image transformations.',
     basePath: '/',
     entryUrl: '/mysterious-transformations',
-    thumbnail: 'https://res.cloudinary.com/dr60nybtj/image/upload/fl_c2pa/f_auto,q_auto/v1757947052/cd-home.png',
+    thumbnail: 'https://res.cloudinary.com/claradenari/image/upload/fl_c2pa/f_auto/q_auto/v1759195611/clara-denari/cd_doorway',
     storageKey: 'inventory_item',
     totalClues: 5
   },
@@ -34,7 +34,7 @@ export const stories: Story[] = [
     tagline: "Midnight is coming for Maison Vesper. Train the Secret Agent to trust the right evidence before the launch goes out.",
     basePath: '/secret-agent',
     entryUrl: '/secret-agent',
-    thumbnail: 'https://res.cloudinary.com/demo/image/upload/f_auto,q_auto/samples/ecommerce/leather-bag-gray',
+    thumbnail: 'https://res.cloudinary.com/claradenari/image/upload/f_auto,q_auto/cd-watch',
     storageKey: 'secret_agent_evidence',
     totalClues: 4
   }

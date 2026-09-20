@@ -52,6 +52,10 @@
   --muted-foreground: oklch(0.68 0.025 85);
   --accent: oklch(0.32 0.025 75);
   --accent-foreground: oklch(0.935 0.023 92);
+  /* Distinct red hue, not present in the source palette: without it, "destructive"
+     inherits the light-mode brick tone and is nearly indistinguishable from --primary. */
+  --destructive: oklch(0.577 0.19 25);
+  --destructive-foreground: oklch(0.97 0.016 95);
   --border: oklch(0.935 0.023 92 / 12%);
   --input: oklch(0.935 0.023 92 / 15%);
   --ring: oklch(0.6 0.12 42 / 60%);
